@@ -6,25 +6,10 @@ export default defineConfig({
   plugins: [react()],
 	server: {
 		proxy: {
-			'/api/register': {
+			'/api': {
 				target: 'http://localhost:3001',
 				changeOrigin: true,
-			},
-			'/api/login': {
-				target: 'http://localhost:3001',
-				changeOrigin: true,
-			},
-			'/api/logout': {
-				target: 'http://localhost:3001',
-				changeOrigin: true,
-			},
-			'/api/users': {
-				target: 'http://localhost:3001',
-				changeOrigin: true,
-			},
-			'/api/posts': {
-				target: 'http://localhost:3001',
-				changeOrigin: true,
+				secure: false,
 			},
 		},
 	},
