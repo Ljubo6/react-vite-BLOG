@@ -4,7 +4,7 @@ const mapUser = require("../helpers/mapUser");
 
 const router = express.Router({ mergeParams: true });
 
-router.post("/register", async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
     const { user, token } = await register(req.body.login, req.body.password);
 
@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
     res.send({ error: e.message || "Unknown error" });
   }
 });
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { user, token } = await login(req.body.login, req.body.password);
 
@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
     res.send({ error: e.message || "Unknown error" });
   }
 });
-router.post("/logout", (req, res) => {
+router.post('/logout', (req, res) => {
   res.cookie("token", "", { httpOnly: true }).send({});
 });
 

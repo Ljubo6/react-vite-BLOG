@@ -16,7 +16,7 @@ const ROLES = require("../constants/roles");
 
 const router = express.Router({ mergeParams: true });
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   const { posts, lastPage } = await getPosts(
     req.query.search,
     req.query.limit,
@@ -25,12 +25,12 @@ router.get("/", async (req, res) => {
   res.send({ data: { lastPage, posts: posts.map(mapPost) } });
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   const post = await getPost(req.params.id);
   res.send({ data: mapPost(post) });
 });
 
-router.post("/:id/comments", authenticated, async (req, res) => {
+router.post('/:id/comments', authenticated, async (req, res) => {
   const newComment = await addComment(req.params.id, {
     content: req.body.content,
     author: req.user.id,
@@ -40,7 +40,7 @@ router.post("/:id/comments", authenticated, async (req, res) => {
 });
 
 router.delete(
-  "/:postId/comments/:commentId",
+  '/:postId/comments/:commentId',
   authenticated,
   hasRole([ROLES.ADMIN, ROLES.MODERATOR]),
   async (req, res) => {
@@ -50,7 +50,7 @@ router.delete(
   }
 );
 
-router.post("/", authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
+router.post('/', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
   const newPost = await addPost({
     title: req.body.title,
     content: req.body.content,
@@ -59,7 +59,7 @@ router.post("/", authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
   res.send({ data: mapPost(newPost) });
 });
 router.patch(
-  "/:id",
+  '/:id',
   authenticated,
   hasRole([ROLES.ADMIN]),
   async (req, res) => {
@@ -72,7 +72,7 @@ router.patch(
   }
 );
 router.delete(
-  "/:id",
+  '/:id',
   authenticated,
   hasRole([ROLES.ADMIN]),
   async (req, res) => {

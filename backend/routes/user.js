@@ -12,14 +12,14 @@ const ROLES = require("../constants/roles");
 
 const router = express.Router({ mergeParams: true });
 
-router.get("/", authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
+router.get('/', authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
   const users = await getUsers();
 
   res.send({ data: users.map(mapUser) });
 });
 
 router.get(
-  "/roles",
+  '/roles',
   authenticated,
   hasRole([ROLES.ADMIN]),
   async (req, res) => {
@@ -29,7 +29,7 @@ router.get(
   }
 );
 router.patch(
-  "/:id",
+  '/:id',
   authenticated,
   hasRole([ROLES.ADMIN]),
   async (req, res) => {
@@ -40,7 +40,7 @@ router.patch(
   }
 );
 router.delete(
-  "/:id",
+  '/:id',
   authenticated,
   hasRole([ROLES.ADMIN]),
   async (req, res) => {
